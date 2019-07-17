@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import SeasonDisplay from './SeasonDisplay';
+import Spinner from './Spinner';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+  const [lat, setLat] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    window.navigator.geolocation.getCurrentPosition(
+      position => setLat({ lat: position.coords.latitude }),
+      err => setErrorMessage({ errorMessage: err.message })
+    )
+  }, []);
+
+  let content;
+  if(errorMessage) {
+    content = <div>Error: {this.state.errorMessage}</div>;
+  } else if(lat) {
+    content = <SeasonDisplay lat={lat} />;
+  } else {
+    content = <Spinner message="Please accept location request" />;
+  }
+
+  return <div className="border red">{content}</div>;
 }
 
 export default App;
