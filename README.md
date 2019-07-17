@@ -1,6 +1,6 @@
 
 # Seasons
-A Season App in React, demonstrating use of React Hook and Functional components
+A Season App in React, demonstrating use of React Hooks with Functional components
 
 
 
