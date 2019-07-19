@@ -6,8 +6,8 @@ export default () => {
 
   useEffect(() => {
     window.navigator.geolocation.getCurrentPosition(
-      position => setLat({ lat: position.coords.latitude }),
-      err => setErrorMessage({ errorMessage: err.message })
+      position => setLat(position.coords.latitude),
+      err => setErrorMessage(err.message)
     )
   }, []);
 
